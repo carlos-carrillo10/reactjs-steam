@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './assets/styles/App.css';
 import './assets/styles/output.css'; //here we user Tailwind CSS rendered styles
 import { Home } from './views/Home';
-import { BrowserRouter, Routes, Route, Link  } from "react-router-dom"; //react-router-dom Version 6
+import { BrowserRouter, Routes, Route, Link  } from 'react-router-dom'; //react-router-dom Version 6
 
 class App extends Component {
   render() {
@@ -11,22 +11,22 @@ class App extends Component {
 
      {/* navigationd design */}
      <div>
-        <nav>
+        {/* <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to='/'>Home</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link to='/about'>About</Link>
             </li>
             <li>
-              <Link to="/users">Users</Link>
+              <Link to='/users'>Users</Link>
             </li>
           </ul>
-        </nav>
+        </nav> */}
 
     <Routes>
-        <Route index path="/" element={<Home />} />
+        <Route index path='/' element={<Home />} />
     </Routes>
     </div>
   </BrowserRouter>
