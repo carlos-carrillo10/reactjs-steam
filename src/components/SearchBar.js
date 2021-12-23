@@ -47,7 +47,7 @@ export class SearchBar extends React.Component
 
     render()
     {
-        return <div>
+        return <React.Fragment>
           <form onSubmit={this.handleSubmit}>
             <div className='flex flex-col gap-3 items-center'>
             <div className='flex flex-row gap-3 justify-center items-center'>
@@ -61,6 +61,6 @@ export class SearchBar extends React.Component
             </div>
            
               </form>
-        </div>
+        </React.Fragment>
     };
 }
