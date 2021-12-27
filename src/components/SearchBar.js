@@ -12,8 +12,7 @@ export class SearchBar extends React.Component
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-
-  handleSubmit =(e)=> 
+  handleSubmit = async(e)=> 
   {
       e.preventDefault()
       
@@ -23,17 +22,21 @@ export class SearchBar extends React.Component
      {
       this.setState({ validationVisible: false });
 
-      const headers = { 'x-rapidapi-host': 'steam2.p.rapidapi.com',
-      'x-rapidapi-key': process.env.REACT_APP_STEAM_API_KEY 
-          }
-       fetch(process.env.REACT_APP_STEAM_API_URL+'search/'+this.state.searchValue+'/page/1', { headers })
-       .then(response => response.json())
-       .then(data => 
-         {
-           this.props.onResults(data)
-         }).catch((error) => {
-           console.log(error)
-         });
+      try{
+        const headers = { 'x-rapidapi-host': 'steam2.p.rapidapi.com',
+        'x-rapidapi-key': process.env.REACT_APP_STEAM_API_KEY 
+            }
+  
+            const response = await fetch(process.env.REACT_APP_STEAM_API_URL+'search/'+this.state.searchValue+'/page/1', { headers })
+            const data = await response.json();
+  
+            this.props.onResults(data)
+      }
+      catch(error)
+      {
+        console.log(error)
+      } 
+     
      }
      else
      {

@@ -1,13 +1,11 @@
 import React from 'react';
 
-export class ContentCard extends React.Component   {
+export const ContentCard = props => {
 
-    goToUrl = (url) =>
+    function goToUrl (url)
     {
        window.location.href = url; 
     }
-
-    render() {
 
     return (
         <React.Fragment>      
@@ -15,15 +13,15 @@ export class ContentCard extends React.Component   {
                 <div className='w-full flex justify-between p-3'>
                     <span className='px-2 hover:bg-gray-300 cursor-pointer rounded'><i className='fas fa-ellipsis-h pt-2 text-lg'></i></span>
                 </div>
-                <img className='w-full bg-cover' src={this.props.image} alt={this.props.title} />
+                <img className='w-full bg-cover' src={props.image} alt={props.title} />
                 <div className='flex flex-col gap-2 px-3 pb-2'>
                     <div className='flex flex-col'>
-                        <h2 className='font-semibold'>{this.props.title}</h2>
-                        {this.props.released !== '' ? <small>Published: {this.props.released}</small> : <small>Published: {this.props.released}</small> }
-                        <h1 className='italic' dangerouslySetInnerHTML={{__html: this.props.review}}></h1>
+                        <h2 className='font-semibold'>{props.title}</h2>
+                        {props.released !== '' ? <small>Published: {props.released}</small> : <small>Published: {props.released}</small> }
+                        <h1 className='italic' dangerouslySetInnerHTML={{__html: props.review}}></h1>
                     </div>
 
-                    <h1 className='text-sm mb-2 text-gray-800 cursor-pointer font-medium underline' onClick={() => this.goToUrl(this.props.url)}>
+                    <h1 className='text-sm mb-2 text-gray-800 cursor-pointer font-medium underline' onClick={() => goToUrl(props.url)}>
                         Learn more
                         </h1>
                 </div>
@@ -31,5 +29,4 @@ export class ContentCard extends React.Component   {
 
         </React.Fragment>
     );
-}
 }

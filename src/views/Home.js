@@ -17,7 +17,7 @@ export class Home extends Component {
       setTitle('Home');
     }
 
-    _handleResults = (results) => {
+    _handleResults = async (results) => {
       console.log('results', results);
       this.setState({ results, usedSearch: true })
     }
