@@ -1,5 +1,6 @@
 import React from 'react';
 import { RoundedButtom } from '../components/RoundedButtom';
+import { Get } from './functions/APIService'
 
 export class SearchBar extends React.Component 
 {
@@ -15,37 +16,13 @@ export class SearchBar extends React.Component
   handleSubmit = async(e)=> 
   {
       e.preventDefault()
-      
-     console.log('data', this.state.searchValue);
 
-     if(this.state.searchValue !== '')
-     {
-      this.setState({ validationVisible: false });
-
-      try{
-        const headers = { 'x-rapidapi-host': 'steam2.p.rapidapi.com',
-        'x-rapidapi-key': process.env.REACT_APP_STEAM_API_KEY 
-            }
-  
-            const response = await fetch(process.env.REACT_APP_STEAM_API_URL+'search/'+this.state.searchValue+'/page/1', { headers })
-            const data = await response.json();
-  
-            this.props.onResults(data)
-      }
-      catch(error)
-      {
-        console.log(error)
-      } 
-     
-     }
-     else
-     {
-        this.setState({ validationVisible: true }); 
-     }     
+      //here return valu we typed
+      this.props.searchValue(this.state.value)
   }
 
   handleChange(e) {
-    this.setState({searchValue: e.target.value, validationVisible: false});     
+    this.setState({value: e.target.value, validationVisible: false});     
   }
 
     render()
@@ -56,7 +33,7 @@ export class SearchBar extends React.Component
             <div className='flex flex-row gap-3 justify-center items-center'>
                 <label className='font-bold'>Search:</label>
                 <input className='form-input' placeholder={this.props.placeholder} 
-                       value={this.state.searchValue}
+                       value={this.state.value}
                        onChange={this.handleChange}></input>
                 <RoundedButtom text='Go' color='bg-green-500'/>
               </div>    
