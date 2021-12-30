@@ -3,6 +3,7 @@ import { CardList } from '../components/CardList';
 import setTitle from '../components/functions/setTitle';
 import { SearchBar } from '../components/SearchBar';
 import { Get } from '../components/functions/APIService'
+import { Loader } from '../components/Loader'
 
 export class Home extends Component {
 
@@ -67,11 +68,14 @@ export class Home extends Component {
         <SearchBar className='content-center' placeholder='search any game...'
                   searchValue={this._handleSearchValue}/>
 
-        {this.state.loading ?  <svg className="animate-spin bg-red-500 h-5 w-5 mr-3 ..." viewBox="0 0 24 24"></svg> : "" }     
-       
-        {/* here we verify if result has data or not */}
-        {this.state.usedSearch ? this.state.results === null || this.state.results.length === 0 ? <p>sorry, results not found</p> : 
-        <CardList data={this.state.results} />: <small>Use the form to search a videogame</small>}
+        {
+        this.state.loading ?  
+          <Loader/>
+          : 
+          /* here we verify if result has data or not */
+          this.state.usedSearch ? this.state.results === null || this.state.results.length === 0 ? <p>sorry, results not found</p> : 
+          <CardList data={this.state.results} />: <small>Use the form to search a videogame</small>
+        }     
       </div>
     </div>
     }
