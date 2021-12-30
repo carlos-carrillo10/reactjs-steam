@@ -4,8 +4,8 @@ import { ContentCard } from './ContentCard'
 export class CardList extends React.Component {
     render() {
         const { data } = this.props
-        return <div className='grid grid-rows-2 w-3/4 '>
-            {
+        return <div className='mx-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-3' >
+             {
                 data.map(game => {
                     return <div key={game.appId}>
                         <ContentCard
@@ -20,6 +20,5 @@ export class CardList extends React.Component {
 
                 })}
         </div>
-
     }
 }

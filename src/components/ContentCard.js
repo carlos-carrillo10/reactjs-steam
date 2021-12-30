@@ -9,10 +9,7 @@ export const ContentCard = props => {
 
     return (
         <React.Fragment>      
-            <div className='rounded overflow-hidden border w-full lg:w-3/12 md:w-3/12 bg-white mx-3 md:mx-0 lg:mx-0'>
-                <div className='w-full flex justify-between p-3'>
-                    <span className='px-2 hover:bg-gray-300 cursor-pointer rounded'><i className='fas fa-ellipsis-h pt-2 text-lg'></i></span>
-                </div>
+            <div className='rounded overflow-hidden border w-full'>
                 <img className='w-full bg-cover' src={props.image} alt={props.title} />
                 <div className='flex flex-col gap-2 px-3 pb-2'>
                     <div className='flex flex-col'>
