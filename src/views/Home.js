@@ -23,10 +23,6 @@ export class Home extends Component {
 
       this.setState({ loading : true, usedSearch: true }) //'usedSearch' helps us to show/hide first message on view
 
-      if(value !== '')
-     {
-        this.setState({ validationVisible: false });
-
         let header = { 'x-rapidapi-host': 'steam2.p.rapidapi.com', 'x-rapidapi-key': process.env.REACT_APP_STEAM_API_KEY  }
 
         let request = await Get(process.env.REACT_APP_STEAM_API_URL+'search/'+value+'/page/1', null, header)
@@ -52,12 +48,7 @@ export class Home extends Component {
         {
           console.error(document.title +' - request: ', request.error);
         }
-     }
-     else
-     {
-        this.setState({ validationVisible: true }); 
-     }     
-     
+
      this.setState({ loading :false })
     }
   

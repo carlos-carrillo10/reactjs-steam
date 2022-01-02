@@ -17,8 +17,19 @@ export class SearchBar extends React.Component
   {
       e.preventDefault()
 
+      console.log("value "+this.state.value)
+
+      if(this.state.value !== '' && this.state.value !== undefined)
+      {
+        this.setState({ validationVisible: false }); 
+
       //here return valu we typed
       this.props.searchValue(this.state.value)
+      }
+      else
+      {
+        this.setState({ validationVisible: true }); 
+      }   
   }
 
   handleChange(e) {
