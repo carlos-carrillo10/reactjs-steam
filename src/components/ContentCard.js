@@ -1,12 +1,7 @@
 import React from 'react';
+import goToUrl from '../components/functions/goToUrl'
 
 export const ContentCard = props => {
-
-    function goToUrl (url)
-    {
-       window.location.href = url; 
-    }
-
     return (
         <React.Fragment>      
             <div className='rounded overflow-hidden border w-full'>
@@ -17,10 +12,15 @@ export const ContentCard = props => {
                         {props.released !== '' ? <small>Published: {props.released}</small> : <small>Published: {props.released}</small> }
                         <h1 className='italic' dangerouslySetInnerHTML={{__html: props.review}}></h1>
                     </div>
-
-                    <h1 className='text-sm mb-2 text-gray-800 cursor-pointer font-medium underline' onClick={() => goToUrl(props.url)}>
+                    <div className='flex flex-row gap-3'>
+                    <h1 className='text-sm mb-2 text-gray-800 cursor-pointer font-medium underline' onClick={() => goToUrl("details/"+props.id)}>
                         Learn more
                         </h1>
+                    <h1 className='text-sm mb-2 text-gray-800 cursor-pointer font-medium underline' onClick={() => goToUrl(props.url)}>
+                        Go to steam
+                        </h1>
+                    </div>
+                    
                 </div>
             </div>
 

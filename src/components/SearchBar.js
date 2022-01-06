@@ -1,6 +1,5 @@
 import React from 'react';
 import { RoundedButtom } from '../components/RoundedButtom';
-import { Get } from './functions/APIService'
 
 export class SearchBar extends React.Component 
 {
