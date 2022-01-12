@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Get } from '../components/functions/APIService'
 import setTitle from '../components/functions/setTitle';
 import { Loader } from '../components/Loader'
@@ -48,7 +48,8 @@ export class Details extends React.Component
 
     render()
     {
-        return <React.Fragment>
+
+       return <React.Fragment>
             {
                 this.state.loading ?  
                   <Loader/>
@@ -63,11 +64,13 @@ export class Details extends React.Component
                             <div className='flex flex-col gap-1'>
                                 <h1 className="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">{this.state.detail.title}</h1>
                                 <h3>{this.state.detail.description}</h3>
+                                <div className='mt-4 flex flex-row gap-5'>
                                 <h3><b>Price: </b> {this.state.detail.price}</h3>
+                                <h3><b>Review: </b> {this.state.detail.allReviews.summary} ({this.state.detail.allReviews.reviewCount}) </h3>
+                                {/* <ReviewTooltip reviewInfo={this.state.detail.allReviews}/> */}
+                               </div>
+                             
 
-
-                                
-                                
                                 <div className='mt-4 flex flex-row gap-5'>
                                     <h3><b>Publisher: </b> {this.state.detail.publisher.name}</h3>
                                     <h3><b>Developer: </b>{this.state.detail.developer.name}</h3>
@@ -82,7 +85,7 @@ export class Details extends React.Component
                       
                        
                         <p className="mt-4 text-gray-500 xl:mt-6 dark:text-gray-300">  
-                            <div class='my-3 flex flex-wrap -m-1'>
+                            <div className='my-3 flex flex-wrap -m-1'>
                               {
                                   this.state.detail.tags.map((tag, index) => {
                                         return <div key={index}>
@@ -97,29 +100,58 @@ export class Details extends React.Component
                             </div>
                         </p>
                         
-                        <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 md:grid-cols-2 xl:grid-cols-3">
-                        {
-                                  this.state.detail.DLCs.map(item => {
-                                        return <div className="p-8 space-y-3 border-2 border-blue-400 dark:border-blue-300 rounded-xl" key={item.appId}>
-                                                    <h1 className="text-2xl font-semibold text-gray-700 capitalize dark:text-white">{item.name}</h1>
-                                    
-                                                    <p className="text-gray-500 dark:text-gray-300">
-                                                    {item.price} 
-                                                    </p>
-                                    
-                                                    <a href={item.url} className="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:underline hover:text-blue-600 dark:hover:text-blue-500">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                        </svg>
-                                                    </a>
-                                                </div>
-                                            })
-                         }
-                        </div>
+                    <div className='flex flex-col mt-3'>
+                      <h1 className='flex text-2xl items-center justify-center md:items-start md:justify-start font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white'>DLC</h1>
+                      <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 md:grid-cols-2 xl:grid-cols-3">   
+                                              {
+                                                 this.state.detail.DLCs.map(item => {
+                                                  return <div className="p-8 space-y-3 border-2 border-blue-400 dark:border-blue-300 rounded-xl" key={item.appId}>
+                                                   <h1 className="text-2xl font-semibold text-gray-700 capitalize dark:text-white">{item.name}</h1>
+                                                          
+                                                     <p className="text-gray-500 dark:text-gray-300">
+                                                      {item.price} 
+                                                       </p>
+                                                          
+                                                        <a href={item.url} className="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:underline hover:text-blue-600 dark:hover:text-blue-500">
+                                                         <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                            </svg>
+                                                          </a>
+                                                    </div>
+                                                   })
+                                              }
+                                              </div>
+                      </div>
                     </div>
                 </section>
             }
-           
+        
              </React.Fragment>
     }
 }
+
+
+
+export default function ReviewTooltip(props) {
+    const [tooltipStatus, setTooltipStatus] = useState(0);
+    return (
+        <React.Fragment>
+
+                {/*Code Block for white tooltip starts*/}
+                <div className="relative" onMouseEnter={() => setTooltipStatus(1)} onMouseLeave={() => setTooltipStatus(0)}>
+                    <div className="mr-2 cursor-pointer font-bold underline ">
+                      Reviews
+                    </div>
+                    {tooltipStatus === 1 && (
+                        <div role="tooltip" className="z-20 -mt-20 w-64 absolute transition duration-150 ease-in-out left-0 ml-8 border-gray-200 shadow-2xl bg-white p-4 rounded">
+                            <p className="text-sm font-bold text-gray-800 pb-1">{props.reviewInfo.summary}</p>
+                            <p className="text-xs leading-4 text-gray-600 pb-3"></p>   
+                        </div>
+                    )}
+                </div>
+                {/*Code Block for white tooltip ends*/}
+            </React.Fragment>
+    );
+}
+
+
